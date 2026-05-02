@@ -277,6 +277,7 @@ extern char discovery_prefix[];
 #define HASS_TYPE_SWITCH         "switch"
 #define HASS_TYPE_BUTTON         "button"
 #define HASS_TYPE_NUMBER         "number"
+#define HASS_TYPE_TEXT           "text"
 #define HASS_TYPE_UPDATE         "update"
 #define HASS_TYPE_COVER          "cover"
 #define HASS_TYPE_DEVICE_TRACKER "device_tracker"

@@ -74,7 +74,12 @@ mqtt:
 
 Alternatively the rssi signal could be used also.
 
-The gateway device also exposes an `RTL_433: Whitelist` switch through MQTT discovery. When the whitelist switch is enabled, only matching RTL_433 devices are published to MQTT and discovered as Home Assistant entities. The whitelist entries can be edited from the OpenMQTTGateway WebUI RF configuration page or with MQTT commands.
+The gateway device also exposes RTL_433 whitelist controls through MQTT discovery:
+
+- `RTL_433: Whitelist`, a switch to enable or disable the filter
+- `RTL_433: Whitelist 1` to `RTL_433: Whitelist 5`, text fields containing accepted device identifiers
+
+When the whitelist switch is enabled, only matching RTL_433 devices are published to MQTT and discovered as Home Assistant entities. The same whitelist can also be edited from the OpenMQTTGateway WebUI RF configuration page. Changes made from either Home Assistant or the WebUI are saved on the gateway and published back in the SYS state topic.
 
 ### RF (RCSwitch based gateway) Auto discovery specificity
 With OpenMQTTGateway [configured to receive RF signals](../setitup/rf.html) messages are transmitted accordingly.

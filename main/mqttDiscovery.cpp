@@ -739,6 +739,24 @@ void pubMqttDiscovery() {
   createDiscoveryFromList(nullptr, systemEntities, entityCount, nullptr, nullptr, nullptr,
                           true, subjectSYStoMQTT, will_Topic, nullptr);
 
+#  ifdef ZgatewayRTL_433
+  for (uint8_t i = 1; i <= 5; i++) {
+    String slotKey = "rtl433wl" + String(i);
+    String slotName = "RTL_433: Whitelist " + String(i);
+    String valueTemplate = "{{ value_json." + slotKey + " | default('') }}";
+    String commandTemplate = "{\"" + slotKey + "\":\"{{ value }}\",\"save\":true}";
+    createDiscovery(HASS_TYPE_TEXT,
+                    subjectSYStoMQTT, slotName.c_str(), (char*)getUniqueId(slotKey, "").c_str(),
+                    will_Topic, "", valueTemplate.c_str(),
+                    "", "", "",
+                    0,
+                    Gateway_AnnouncementMsg, will_Message, true, subjectMQTTtoSYSset,
+                    "", "", "", "", false,
+                    stateClassNone, nullptr, nullptr, nullptr,
+                    commandTemplate.c_str());
+  }
+#  endif
+
 #  ifdef SecondaryModule
   // Secondary module system sensors - dynamic string handling required
   String secondaryPrefix = String(SecondaryModule);
